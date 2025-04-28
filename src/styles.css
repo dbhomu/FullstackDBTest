@@ -1,1 +1,81 @@
-/* You can add global styles to this file, and also import other style files */
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: rgb(22, 22, 22);
+  }
+  
+
+  .page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+
+  .form-container {
+    display: flex;
+    gap: 80px; /
+  }
+  
+  .parent-container {
+    display: flex;
+    align-items: stretch; 
+    gap: 40px; 
+  }
+  
+  .container,
+  .meeting-schedule {
+    flex: 1; 
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+  }
+  
+
+  h1 {
+    margin-bottom: 10px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    
+  }
+  
+ 
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="address"],
+  input[type="number"],
+  input[type="date"] {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 10px;
+    
+  }
+  
+
+  input[type="submit"] {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #b9b9b9;
+  }
+  

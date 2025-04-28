@@ -1,13 +1,140 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Fullstack</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create a Client</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  
+  
+
+  <div class="page">
+    <div class="form-container">
+  
+      <div class="container">
+        <h1 class="left-header">Create a Client</h1>
+        <p>Please fill in this form to create a client</p>
+        
+    <form id="clientForm">
+      <label for="name"><b>Name</b></label><br>
+      <input type="text" placeholder="Enter Name" id="name" name="name"><br><br>
+      <label for="email"><b>Email</b></label><br>
+      <input type="email" placeholder="Enter Email" id="email" name="email"><br><br>
+      <label for="address"><b>Address</b></label><br>
+      <input type="address" placeholder="Enter Address" id="address" name="address"><br><br>
+      <label for="Password"><b>Password</b></label><br>
+      <input type="password" placeholder="Enter Password" id="Password" name="Password"><br><br>
+      <label for="Password"><b>Repeat Password</b></label><br>
+      <input type="password" placeholder="Repeat Password" id="RepeatPassword" name="Password"><br><br>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  <div class="meeting-schedule">
+    <h1 class="right-header">Create a Meeting Schedule</h1>
+      <form id="meetingForm">
+        <label for="MeetingTopic"><b>Meeting Topic</b></label><br>
+        <input type="text" placeholder="Enter Meeting Topic" id="MeetingTopic" name="MeetingTopic"><br><br>
+        <label for="Number of People"><b>Number of People</b></label><br>
+        <input type="number" placeholder="Enter Number of People" id="Number of People" name="Number of People" min="1"><br><br>
+        <label for="Start Time"><b>Start Time</b></label><br>
+        <input type="date" id="Start Time" name="Start Time"><br><br>
+
+        
+        <input type="submit" value="Submit">
+      
+          
+        
+      </form>
+    </div>
+  </div>
+</div>
+
   <app-root></app-root>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const clientForm = document.getElementById('clientForm');
+      const meetingForm = document.getElementById('meetingForm');
+    
+      clientForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+    
+        const username = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('Password').value;
+        const repeatPassword = document.getElementById('RepeatPassword').value;
+    
+        if (password !== repeatPassword) {
+          alert('Passwords do not match. Please try again.');
+          return;
+        }
+    
+        fetch('http://localhost:3000/submitClient', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            password
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Client saved successfully:', data);
+          alert('Client saved successfully!');
+          
+        })
+        .catch(error => {
+          console.error('Error saving client:', error);
+          alert('Error saving client.');
+        });
+      });
+    
+      meetingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+    
+        const meeting_topic = document.getElementById('MeetingTopic').value;
+        const number_of_people = document.getElementById('Number of People').value;
+        const meeting_date = document.getElementById('Start Time').value;
+    
+        fetch('http://localhost:3000/submitMeeting', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            meeting_topic,
+            number_of_people,
+            meeting_date
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Meeting saved successfully:', data);
+          alert('Meeting saved successfully!');
+          
+        })
+        .catch(error => {
+          console.error('Error saving meeting:', error);
+          alert('Error saving meeting.');
+        });
+      });
+    });
+
+    
+  document.addEventListener('DOMContentLoaded', function() {
+
+    const dt = new Date().toISOString().split('T')[0];
+    document.getElementById('Start Time').setAttribute('min', dt);
+  });
+
+
+
+    </script>
+    
+    
 </body>
 </html>
